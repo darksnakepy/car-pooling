@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+enum UserType {
+    USER 
+    DRIVER
+}
+
+model User {
+    id            String            @id @default(uuid()) 
+    username      String            @unique 
+    email         String            @unique
+    password      String
+    name          String
+    lastname      String 
+    phoneNumber   String            @unique
+    idCard        String            @unique
+    userType      UserType
+    driverId      String?           @unique
+    sessions      Session[]
+    Driver        Driver?           @relation(fields: [driverId], references: [id])
+    Feedback      Feedback[]  
+}
+
+model Driver {
+    id              String          @id
+    User            User?
+    licensePlateId  String          @unique
+    licensePlate    LicensePlate    @relation(fields: [licensePlateId], references: [id])
+    trips           Trip[]
+}
+
+model LicensePlate {
+    id      String                  @id
+    Driver  Driver? 
+}
+
+model Car {
+    licensePlate  String            @id
+    model         String 
+    
+}
+
+model Trip {
+    id                String        @id
+    departureCity     String
+    destinationCity   String
+    depatureDate      DateTime
+    departureHour     DateTime
+    price             Decimal
+    estimatedTime     String
+    driverId          String
+    Driver            Driver?       @relation(fields: [driverId], references: [id])
+}
+
+model Feedback {
+    id      String                  @id
+    rating  String   
+    User    User?                   @relation(fields: [userId], references: [id])
+    userId  String?
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  User      User     @relation(references: [id], fields: [userId])
+}
