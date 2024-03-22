@@ -1,4 +1,6 @@
 import { db } from "~/server/db";
+import { Argon2id } from "oslo/password";
+import { generateId } from "lucia";
 
 const driverRegister = () =>{
 
@@ -61,20 +63,21 @@ async function register(formData: FormData){
 
 	}
 
-	//const hashedPassword = await new Argon2id().hash(user.password);
+	const hashedPassword = await new Argon2id().hash(user.password);
+	const id = await generateId(15)
 
 	try{
 		const newUser = await db.user.create({
 			data: {
-				id: "uqwhe",
+				id: id,
 				username: user.username,
 				email: user.email,
-				password: user.password,
+				password: hashedPassword,
 				name: user.name,
 				lastname: user.lastname,
 				phoneNumber: user.phoneNumber,
 				idCard: user.identityCard,
-				userType: "USER"
+				userType: "DRIVER"
 			}
 		})
 		}catch (error) {
