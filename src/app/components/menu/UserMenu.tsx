@@ -6,11 +6,10 @@ import { useRouter } from 'next/navigation';
 
 
 interface UserMenuProps{
-    username: string
-    isDriver?: boolean
+    username?: string
 }
 
-const UserMenu = ({username, isDriver}: UserMenuProps) =>{
+const UserMenu = ({username}: UserMenuProps) =>{
 
     const router = useRouter()
 

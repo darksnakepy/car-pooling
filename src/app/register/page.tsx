@@ -28,7 +28,7 @@ const Register = () =>{
                         <Link className="hover:underline" href={"register/driver/"}>Register as driver</Link>
                 </div>
 				<div>
-					<Link className="hover:underline" href={"register/driver/"}>Login</Link>
+					<Link className="hover:underline" href={"/login"}>Login</Link>
 				</div>
 			</form>
 		</div>
