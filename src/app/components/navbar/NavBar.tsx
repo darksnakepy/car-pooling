@@ -1,21 +1,15 @@
-"use client"
 import Link from "next/link"
-import { getUser } from "~/server/auth"
+import { validateRequest } from "~/server/auth"
 import Image from 'next/image'
 import UserMenu from "../menu/UserMenu"
-import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 
-interface NavBarProps{
-    isUserLogged: boolean
-}
+const NavBar = async() =>{   
 
-const NavBar = () =>{   
-
-    const router = useRouter()    
-    //const session = getUser()
+    const session = await validateRequest()
 
     const handleClick = () =>{
-        router.push("/register")
+        redirect("/navigation")
     }
 
     return(
@@ -24,7 +18,7 @@ const NavBar = () =>{
                 {/*<Image src={} width={} height={}></Image> logo*/}
 
                 <div className="ml-auto">
-                        <UserMenu />          <button onClick={handleClick} className="ml-8 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-[#1545af] dark:hover:bg-blue-800 focus:outline-none">Sign up</button>
+                    <UserMenu username={session.user?.username} />
                 </div>
             </div>      
         </div>

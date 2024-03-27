@@ -22,7 +22,9 @@ const UserMenu = ({username}: UserMenuProps) =>{
     const handleClose = () => {
         setAnchorEl(null);
     }
-
+    const handleSignUp = () =>{
+        router.push("/register")
+    }
     const handleClickProfile = () =>{
         router.push("/profile")
     }
@@ -42,7 +44,8 @@ const UserMenu = ({username}: UserMenuProps) =>{
                 MenuListProps={{
                 'aria-labelledby': 'basic-button',
                 }}
-            >
+            >   
+                <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
                 <MenuItem onClick={handleClickProfile}>{username}</MenuItem>
                 <MenuItem onClick={handleLogOut}>Log out</MenuItem>
             </Menu>

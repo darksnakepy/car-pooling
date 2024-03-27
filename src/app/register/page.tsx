@@ -2,6 +2,9 @@ import Link from "next/link";
 import { db } from "~/server/db";
 import { Argon2id } from "oslo/password";
 import { generateId } from "lucia";
+import { lucia } from "~/server/auth";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation"
 
 const Register = () =>{
     return(
@@ -90,9 +93,11 @@ async function register(formData: FormData){
 		}catch (error) {
 			console.error("Error registering user:", error);
 		}
+
+	const session = await lucia.createSession(id, {})
+	const sessionCookie = lucia.createSessionCookie(session.id);
+	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+	return redirect("/")
 } 
-
-
-
 
 export default Register
