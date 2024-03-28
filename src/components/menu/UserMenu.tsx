@@ -45,7 +45,7 @@ const UserMenu = ({username}: UserMenuProps) =>{
                 'aria-labelledby': 'basic-button',
                 }}
             >   
-                <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
+                {username ? "" : <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>}
                 <MenuItem onClick={handleClickProfile}>{username}</MenuItem>
                 <MenuItem onClick={handleLogOut}>Log out</MenuItem>
             </Menu>

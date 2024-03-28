@@ -7,7 +7,7 @@ import { redirect } from "next/navigation"
 const NavBar = async() =>{   
 
     const session = await validateRequest()
-
+    
     const handleClick = () =>{
         redirect("/navigation")
     }

@@ -7,6 +7,7 @@ import { cache } from "react";
 
 interface DatabaseUserAttributes {
 	username: string
+	role: string
 }
 
 const adapter = new PrismaAdapter(db.session, db.user);
@@ -14,13 +15,13 @@ const adapter = new PrismaAdapter(db.session, db.user);
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
-			// set to `true` when using HTTPS
 			secure: process.env.NODE_ENV === "production" ? true : false,
 		}
 	},
 	getUserAttributes: (attributes) => {
 		return {
-			username: attributes.username
+			username: attributes.username,
+			role: attributes.role
 		};
 	}
 });

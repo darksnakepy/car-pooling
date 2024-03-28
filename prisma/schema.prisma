@@ -34,20 +34,15 @@ model User {
 model Driver {
     id              String          @id
     User            User?
-    licensePlateId  String          @unique
-    licensePlate    LicensePlate    @relation(fields: [licensePlateId], references: [id])
+    Car             Car[]
     trips           Trip[]
-}
-
-model LicensePlate {
-    id      String                  @id
-    Driver  Driver? 
 }
 
 model Car {
     licensePlate  String            @id
     model         String 
-    
+    Driver        Driver?           @relation(fields: [driverId], references: [id])
+    driverId      String?           @unique
 }
 
 model Trip {

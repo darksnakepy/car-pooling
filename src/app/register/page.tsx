@@ -2,11 +2,16 @@ import Link from "next/link";
 import { db } from "~/server/db";
 import { Argon2id } from "oslo/password";
 import { generateId } from "lucia";
-import { lucia } from "~/server/auth";
+import { lucia, validateRequest } from "~/server/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation"
 
-const Register = () =>{
+const Register = async() =>{
+	const session = await validateRequest()
+
+	if(session){
+		return redirect("/")
+	}
     return(
         <div className="w-full h-screen flex items-center justify-center flex-col bg-[#181a1b]">
 			<h1 className="text-[40px] mb-4 text-white">Sign up as Passenger</h1>

@@ -53,8 +53,6 @@ async function login(formData: FormData){
         cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
         return redirect("/")
     }
-
-
 }
 
 export default LogIn
