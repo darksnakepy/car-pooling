@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { validateRequest } from "~/server/auth"
 import Image from 'next/image'
-import UserMenu from "../menu/UserMenu"
+import UserMenu from "./UserMenu"
 import { redirect } from "next/navigation"
 
 const NavBar = async() =>{   

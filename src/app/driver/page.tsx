@@ -1,13 +1,12 @@
 import { redirect } from "next/navigation"
 import { validateRequest } from "~/server/auth"
+import DriverPage from "~/components/DriverPage/DriverPage"
 
-const DriverPage = async() =>{
+const driver = async() =>{
 
     const session = await validateRequest() 
-    if(session.user?.role === "DRIVER"){
-        return <DriverPage />
-    }
-    return redirect("/")
+
+    return <DriverPage />
 }   
 
-export default DriverPage
+export default driver

@@ -27,7 +27,6 @@ const LogIn = () => {
 
 async function login(formData: FormData){
     "use server"
-
     const userData = 
     {
         user: formData.get("username") as string,

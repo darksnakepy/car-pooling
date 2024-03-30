@@ -27,15 +27,23 @@ model User {
     userType      UserType
     driverId      String?           @unique
     sessions      Session[]
-    Driver        Driver?           @relation(fields: [driverId], references: [id])
+    Driver        Driver?           @relation(fields: [driverId], references: [id], onDelete: Cascade)
     Feedback      Feedback[]  
 }
 
 model Driver {
-    id              String          @id
+    id              String          @id @default(cuid())
     User            User?
+    license         DrivingLicense  @relation(fields: [licenseNumber], references: [licenseId], onDelete: Cascade)
+    licenseNumber   String          @unique
     Car             Car[]
     trips           Trip[]
+}
+
+model DrivingLicense{
+    licenseId     String      @id
+    expiration    DateTime
+    Driver        Driver?
 }
 
 model Car {

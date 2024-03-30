@@ -1,5 +1,3 @@
-import { check } from "prettier"
-import { validateRequest } from "~/server/auth"
 import { db } from "~/server/db"
 
 interface AddCarProps{
