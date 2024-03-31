@@ -49,12 +49,12 @@ model DrivingLicense{
 model Car {
     licensePlate  String            @id
     model         String 
-    Driver        Driver?           @relation(fields: [driverId], references: [id])
-    driverId      String?           @unique
+    Driver        Driver           @relation(fields: [driverId], references: [id])
+    driverId      String           @unique
 }
 
 model Trip {
-    id                String        @id
+    id                String        @id @default(cuid())
     departureCity     String
     destinationCity   String
     depatureDate      DateTime

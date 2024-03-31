@@ -51,7 +51,12 @@ async function addCar(driverId: string, formData: FormData){
     await db.car.create({
         data: {
             licensePlate: car.license,
-            model: car.carModel
+            model: car.carModel,
+            Driver: {
+                connect: {
+                    id: driverId
+                }
+            }
         }
     })
 }
