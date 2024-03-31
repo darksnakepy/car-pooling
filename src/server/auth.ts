@@ -7,7 +7,7 @@ import { cache } from "react";
 
 interface DatabaseUserAttributes {
 	username: string
-	role: string
+	userType: string
 }
 
 const adapter = new PrismaAdapter(db.session, db.user);
@@ -21,7 +21,7 @@ export const lucia = new Lucia(adapter, {
 	getUserAttributes: (attributes) => {
 		return {
 			username: attributes.username,
-			role: attributes.role
+			userType: attributes.userType
 		};
 	}
 });

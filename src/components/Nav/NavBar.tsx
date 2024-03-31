@@ -7,10 +7,6 @@ import { redirect } from "next/navigation"
 const NavBar = async() =>{   
 
     const session = await validateRequest()
-    
-    const handleClick = () =>{
-        redirect("/navigation")
-    }
 
     return(
         <div className="fixed w-full bg-[#181a1b] shadow-sm ">

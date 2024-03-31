@@ -10,7 +10,7 @@ interface Cars{
     model: string
 }
 
-const DriverTrip = async({driverId, cars}:DriverTripProps) =>{
+const CreateTrip = async({driverId, cars}:DriverTripProps) =>{
     return(
         <div className="w-full h-screen flex items-center justify-center flex-col bg-[#181a1b]">
         <h1 className="text-[40px] mb-4 text-white">Create a trip</h1>
@@ -67,7 +67,7 @@ async function addTrip(id: string, formData: FormData){
         data: {
             departureCity: trip.depCity,
             destinationCity: trip.destCity,
-            depatureDate: trip.depCity,
+            depatureDate: trip.depDate,
             departureHour: trip.depHour,
             price: trip.price,
             estimatedTime: trip.estTime,
@@ -76,4 +76,4 @@ async function addTrip(id: string, formData: FormData){
     })
 }
 
-export default DriverTrip
+export default CreateTrip

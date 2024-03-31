@@ -57,8 +57,8 @@ model Trip {
     id                String        @id @default(cuid())
     departureCity     String
     destinationCity   String
-    depatureDate      DateTime
-    departureHour     DateTime
+    depatureDate      String
+    departureHour     String
     price             Decimal
     estimatedTime     String
     driverId          String

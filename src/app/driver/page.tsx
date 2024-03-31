@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { validateRequest } from "~/server/auth"
-import DriverPage from "~/components/DriverPage/DriverPage"
+import DriverPage from "~/components/Driver/DriverPage"
 import { db } from "~/server/db"
 
 const driver = async() =>{
@@ -18,13 +18,34 @@ const driver = async() =>{
                             licensePlate: true,
                             model: true
                         }
+                    },
+                    trips: {
+                        select:{
+                            departureCity: true,
+                            destinationCity: true,
+                            departureHour: true,
+                            estimatedTime: true,
+                            price: true
+                        }
                     }
                 },
-            }
-        }
+            },
+            username: true,
+            name: true,
+            lastname: true
+        }        
     })
 
-    return <DriverPage id={driver?.Driver?.id} Car={driver?.Driver?.Car}/>
+    if(session.user?.userType==="DRIVER"){
+         return <DriverPage 
+                    id={driver?.Driver?.id} 
+                    Car={driver?.Driver?.Car} 
+                    username={driver?.username}
+                    name={driver?.name}
+                    lastname={driver?.lastname}
+                />
+    }
+    return redirect("/")
 }   
 
 export default driver
