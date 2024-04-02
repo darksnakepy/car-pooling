@@ -3,7 +3,7 @@ import { validateRequest } from "~/server/auth"
 import DriverPage from "~/components/Driver/DriverPage"
 import { db } from "~/server/db"
 
-const driver = async() =>{
+const driver = async() =>{   
     const session = await validateRequest() 
     const driver = await db.user.findUnique({
         where: {
@@ -21,10 +21,12 @@ const driver = async() =>{
                     },
                     trips: {
                         select:{
+                            id: true,
                             departureCity: true,
                             destinationCity: true,
                             departureHour: true,
                             estimatedTime: true,
+                            depatureDate: true,
                             price: true
                         }
                     }
@@ -36,14 +38,17 @@ const driver = async() =>{
         }        
     })
 
+    const DriverPageProps = {
+        id: driver?.Driver?.id,
+        Car: driver?.Driver?.Car,
+        username: driver?.username,
+        name: driver?.name,
+        lastname: driver?.lastname,
+        Trips: driver?.Driver?.trips
+    }
+
     if(session.user?.userType==="DRIVER"){
-         return <DriverPage 
-                    id={driver?.Driver?.id} 
-                    Car={driver?.Driver?.Car} 
-                    username={driver?.username}
-                    name={driver?.name}
-                    lastname={driver?.lastname}
-                />
+         return <DriverPage {...DriverPageProps}/>
     }
     return redirect("/")
 }   

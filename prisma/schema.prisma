@@ -47,7 +47,7 @@ model DrivingLicense{
 }
 
 model Car {
-    licensePlate  String            @id
+    licensePlate  String           @id
     model         String 
     Driver        Driver           @relation(fields: [driverId], references: [id])
     driverId      String           @unique
