@@ -7,9 +7,9 @@ interface AddCarProps{
 const AddCar = ({driverId}: AddCarProps) =>{
 
     return(
-        <div className="w-full h-screen flex items-center justify-center flex-col bg-[#181a1b]">
-			<h1 className="text-[40px] mb-4 text-white">Insert a car</h1>
-			<form className="w-1/4 flex flex-col p-7 border-2 rounded-lg mb-4" action={addCar.bind(null, driverId)}>
+        <div className="w-full h-screen flex items-center justify-center flex-col bg-[#1e2022]">
+			<h1 className="text-[35px] mb-4 font-bold text-white">Create a new car</h1>
+			<form className="w-1/4 flex flex-col p-7 border-2 rounded-lg mb-4 bg-[#181a1b]" action={addCar.bind(null, driverId)}>
 				<label className="mb-1 text-white" htmlFor="carModel">Model:</label>
 				<input name="carModel" id="carModel" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
 				<label className="mt-1 text-white" htmlFor="licensePlate">License Plate</label>

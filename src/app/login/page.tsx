@@ -40,7 +40,6 @@ async function login(formData: FormData){
     })
 
     if(!existingUser){
-        console.log("user not found")
         return 
     }
 

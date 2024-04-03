@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation"
 import { db } from "~/server/db"
 
 interface DriverTripProps{
@@ -12,9 +13,9 @@ interface Cars{
 
 const CreateTrip = async({driverId, cars}:DriverTripProps) =>{
     return(
-        <div className="w-full h-screen flex items-center justify-center flex-col bg-[#181a1b]">
-        <h1 className="text-[40px] mb-4 text-white">Create a trip</h1>
-        <form className="w-1/4 flex flex-col p-7 border-2 rounded-lg mb-4" action={addTrip.bind(null, driverId)}>
+        <div className="w-full h-screen flex items-center justify-center flex-col bg-[#1e2022]">
+        <h1 className="text-[35px] mb-4 text-white font-bold">Create a trip</h1>
+        <form className="w-1/4 flex flex-col p-7 border-2 rounded-lg mb-4 bg-[#181a1b]" action={addTrip.bind(null, driverId)}>
             <label className="mb-1 text-white" htmlFor="depCity">Departure city:</label>
             <input name="depCity" id="depCity" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
             <label className="mt-1 text-white" htmlFor="password">Destination city:</label>
@@ -74,6 +75,7 @@ async function addTrip(id: string, formData: FormData){
             driverId: id
         }
     })
+    return redirect("/driver")
 }
 
 export default CreateTrip

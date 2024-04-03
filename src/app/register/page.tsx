@@ -28,12 +28,10 @@ const Register = async() =>{
 				<input name="identitycard" id="identitycard" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
 				<button className="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">Sign up</button>
 
-				<div className="text-white mt-3 text-[15px]">
-                        <Link className="hover:underline" href={"register/driver/"}>Register as driver</Link>
+				<div className="text-white mt-3 text-[15px] flex items-center justify-center flex-col">
+						<div>Do you have an account? <Link className="hover:underline" href={"/login"}>Login</Link></div>
+						<div className="mt-1">Are you a driver? <Link className="hover:underline" href={"/register/driver"}>Register</Link></div>
                 </div>
-				<div>
-					<Link className="hover:underline" href={"/login"}>Login</Link>
-				</div>
 			</form>
 		</div>
     )
@@ -53,7 +51,9 @@ async function register(formData: FormData){
 	}	
 
 	if(typeof user.username !== "string" || user.username.length < 3){
-		// display the error
+		return {
+			message: 'username is too short.',
+		}
 	}
 	if(typeof user.email !== "string"){
 

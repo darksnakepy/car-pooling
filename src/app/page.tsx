@@ -5,9 +5,9 @@ import RideBar from "../components/Search/RideBar";
 export default function HomePage() {
 
   return (
-    <>
+    <div className="bg-[#1e2022]">
       <NavBar/>
       <RideBar />
-    </>
+    </div>
   );
 }

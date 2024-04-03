@@ -50,7 +50,9 @@ async function register(formData: FormData){
 	}	
 
 	if(typeof user.username !== "string" || user.username.length < 3){
-		// display the error
+		return {
+			message: 'username is too short.',
+		}; 
 	}
 	if(typeof user.email !== "string"){
 
