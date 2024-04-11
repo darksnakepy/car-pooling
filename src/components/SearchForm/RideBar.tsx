@@ -25,8 +25,6 @@ const RideBar = () => {
     );
 }
 
-
-
 /*
 async function RideBarAction(formData: FormData){
     "use server"

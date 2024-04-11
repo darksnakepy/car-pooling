@@ -14,7 +14,7 @@ const NavBar = async() =>{
             <div className="px-4 md:px-16 py-6 flex flex-row items-center justify-between overflow-hidden">
                 {/*<Image src={} width={} height={}></Image> logo*/}
 
-                <div className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+                <div className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-10 text-white">
                     {session.session && session?.user?.userType === "DRIVER" ? 
                         <ul>  
                             <Link href={"/driver/createtrip"} className="">Create a new trip</Link>
@@ -23,7 +23,7 @@ const NavBar = async() =>{
                         </ul>
                         :
                         <>
-                            <Link href={"/driver"} className="">Your bookings</Link>
+                            <Link href={"/profile"} className="text-white">Your bookings</Link>
                             <Link href={"/driver"} className=""></Link>
                         </>
                     }
