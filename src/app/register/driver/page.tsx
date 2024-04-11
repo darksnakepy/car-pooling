@@ -37,6 +37,8 @@ const driverRegister = async() =>{
 async function register(formData: FormData){
 	'use server';
 
+	let dateTime = new Date().toString()
+
 	const user = {
 		username: formData.get('username') as string,
 		name: formData.get('name') as string,
@@ -51,26 +53,45 @@ async function register(formData: FormData){
 
 	if(typeof user.username !== "string" || user.username.length < 3){
 		return {
-			message: 'username is too short.',
-		}; 
+			error: "Username is not valid or too short",
+		} 
 	}
 	if(typeof user.email !== "string"){
-
+		return {
+			error: "Email is not valid"
+		} 
 	}
 	if(typeof user.password !== "string"){
-
+		return {
+			error: "Password is not valid"
+		} 
 	}
 	if(typeof user.name !== "string"){
-
+		return {
+			error: "Name is not valid"
+		} 
 	}
 	if(typeof user.lastname !== "string"){
-
+		return {
+			error: "Lastname is not valid"
+		} 
 	}
 	if(typeof user.phoneNumber !== "string"){
-
+		return {
+			error: "Phone number is not valid"
+		} 
 	}
 	if(typeof user.identityCard !== "string"){
-
+		return {
+			error: "Identity card is not valid"
+		} 
+	}
+	if(user.expiration < dateTime){
+		console.log(dateTime)
+		console.log("License is not valid anymore")
+		return {
+			error: "License is not valid anymore"
+		} 
 	}
 
 	const hashedPassword = await new Argon2id().hash(user.password);

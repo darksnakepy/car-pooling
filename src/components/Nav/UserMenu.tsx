@@ -11,28 +11,27 @@ interface UserMenuProps {
 
 const UserMenu = ({ username }: UserMenuProps) => {
 
-    const router = useRouter();
-
+    const router = useRouter()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorEl)
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorEl(event.currentTarget)
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorEl(null)
     };
 
     const handleSignUp = () => {
-        router.push("/register");
+        router.push("/register")
     };
 
     const handleClickProfile = () => {
         if (username) {
-            router.push("/profile");
+            router.push("/profile")
         } else {
-            router.push("/login");
+            router.push("/login")
         }
     };
 

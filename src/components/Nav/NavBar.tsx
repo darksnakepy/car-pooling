@@ -24,12 +24,15 @@ const NavBar = async() =>{
                         :
                         <>
                             <Link href={"/profile"} className="text-white">Your bookings</Link>
-                            <Link href={"/driver"} className=""></Link>
+                            <Link href={"/user"} className="text-white">Homepage</Link>
+                            <Link href={"/driver"} className="text-white">Ratings</Link>
                         </>
                     }
-                    <UserMenu username={session.user?.username}/>
+                    <div className="">
+                        <UserMenu username={session.user?.username}/>    
+                    </div>
                 </div>
-            </div>      
+            </div>   
         </div>
     )
 }

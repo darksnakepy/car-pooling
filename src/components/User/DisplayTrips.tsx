@@ -1,21 +1,22 @@
 interface DisplayTripsProps {
-  userId?: string;
-  trips: Trips[]; 
+  userId?: string
+  trips: Trips[]
   search: {
     leavingfrom: string; 
     goingto: string; 
     date: string; 
-  };
+  }
 }
 
 interface Trips {
-  id: string;
-  departureCity: string;
-  destinationCity: string;
-  departureHour: string;
-  estimatedTime: string;
-  departureDate: string;
-  price: number;
+  id: string
+  departureCity: string
+  destinationCity: string
+  departureHour: string
+  estimatedTime: string
+  departureDate: string
+  price: number
+  driverId: string
 }
 
 const DisplayTrips = ({ userId, trips, search }: DisplayTripsProps) => {
@@ -32,14 +33,16 @@ const DisplayTrips = ({ userId, trips, search }: DisplayTripsProps) => {
                 key={trip.id}
                 className="flex flex-col p-7 border-2 rounded-lg mb-4 dark:bg-[#202324] mx-5"
               >
-                <p className="font-bold font-medium text-white">
-                  {trip.departureCity} - {trip.destinationCity}
+                <p className="font-bold text-white">
+                  {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()}
                 </p>
                 <div className="flex flex-row justify-between mt-2 text-white">
-                  <div className="text-sm">Departure Time: {trip.departureHour}</div>
-                  <div className="text-sm font-bold">Estimated Time: {trip.estimatedTime}</div>
+                  <div className="text-sm">Departure Date: {trip.departureDate}</div>
+                  <button type="submit" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ml-2 relative">Book this trip</button>
                 </div>
-                <div className="text-sm">Departure Date: {trip.departureDate}</div>
+                <div className="text-sm font-bold">Details:</div>
+                <div className="text-sm mt-1">Departure Hour: {trip.departureHour}</div>
+                <div className="text-sm">Estimated Time: {trip.estimatedTime}</div>
                 <div className="text-sm mt-2">Cost: {trip.price}$</div>
               </div>
             ))

@@ -63,6 +63,7 @@ model Trip {
     estimatedTime     String
     driverId          String
     Driver            Driver?       @relation(fields: [driverId], references: [id])
+    
 }
 
 model Feedback {

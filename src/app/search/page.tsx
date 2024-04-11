@@ -7,8 +7,8 @@ const Trip = async({ searchParams }: { searchParams: { [key: string]: string | s
     
     const session = await validateRequest()
 
-    const leavingfrom = searchParams.leavingfrom;
-    const goingto = searchParams.goingto;
+    const leavingfrom = searchParams.leavingfrom
+    const goingto = searchParams.goingto
     const date = searchParams.date
 
     const trips = await db.trip.findMany({
