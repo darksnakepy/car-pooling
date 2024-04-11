@@ -26,7 +26,7 @@ const driver = async() =>{
                             destinationCity: true,
                             departureHour: true,
                             estimatedTime: true,
-                            depatureDate: true,
+                            departureDate: true,
                             price: true
                         }
                     }

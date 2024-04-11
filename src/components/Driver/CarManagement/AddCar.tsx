@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation"
 import { db } from "~/server/db"
 
 interface AddCarProps{
@@ -59,6 +60,7 @@ async function addCar(driverId: string, formData: FormData){
             }
         }
     })
+    return redirect("/driver")
 }
 
 export default AddCar

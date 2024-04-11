@@ -66,9 +66,9 @@ async function addTrip(id: string, formData: FormData){
 
     const addTrip = await db.trip.create({
         data: {
-            departureCity: trip.depCity,
-            destinationCity: trip.destCity,
-            depatureDate: trip.depDate,
+            departureCity: trip.depCity.toLocaleLowerCase(),
+            destinationCity: trip.destCity.toLocaleLowerCase(),
+            departureDate: trip.depDate,
             departureHour: trip.depHour,
             price: trip.price,
             estimatedTime: trip.estTime,
