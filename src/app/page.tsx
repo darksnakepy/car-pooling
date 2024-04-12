@@ -10,7 +10,9 @@ export default async function HomePage() {
     <div className="bg-[#1e2022]">
       <NavBar/>
       {session.user?.userType === "USER" ? (
-      <RideBar />) : (<></>)}
+        <RideBar />) : ( 
+          <div className="w-full h-screen bg-[#1e2022]"></div>
+      )}
     </div>
   );
 }

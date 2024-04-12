@@ -46,7 +46,7 @@ async function addCar(driverId: string, formData: FormData){
     })
 
     if(checkVehicle){
-        //handle the error
+       console.log("car exists")
     }
     
     await db.car.create({
