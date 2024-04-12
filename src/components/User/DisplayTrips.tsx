@@ -1,10 +1,15 @@
+"use client"
+
+import bookTrip from "~/server/user/book"
+
 interface DisplayTripsProps {
-  userId?: string
+  userId: string
   trips: Trips[]
+  status: string
   search: {
-    leavingfrom: string; 
-    goingto: string; 
-    date: string; 
+    leavingfrom: string
+    goingto: string
+    date: string
   }
 }
 
@@ -19,7 +24,9 @@ interface Trips {
   driverId: string
 }
 
-const DisplayTrips = ({ userId, trips, search }: DisplayTripsProps) => {
+
+const DisplayTrips = async({ userId, trips, search, status }: DisplayTripsProps) => {
+
   return (
     <div className="flex justify-center h-screen bg-[#1e2022] text-white">
       <div className="container mx-auto py-8">
@@ -27,7 +34,7 @@ const DisplayTrips = ({ userId, trips, search }: DisplayTripsProps) => {
           <h2 className="text-xl flex items-center justify-center font-bold mb-4">
             Found Trips
           </h2>
-          {trips.length > 0 ? (
+          {trips.length > 0 && status !== "PENDING" || status !== "RESERVED" ?  (
             trips.map((trip) => (
               <div
                 key={trip.id}
@@ -38,7 +45,7 @@ const DisplayTrips = ({ userId, trips, search }: DisplayTripsProps) => {
                 </p>
                 <div className="flex flex-row justify-between mt-2 text-white">
                   <div className="text-sm">Departure Date: {trip.departureDate}</div>
-                  <button type="submit" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ml-2 relative">Book this trip</button>
+                  <button onClick={async() => await bookTrip(userId, trip.id)} type="submit" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ml-2 relative">Book this trip</button>
                 </div>
                 <div className="text-sm font-bold">Details:</div>
                 <div className="text-sm mt-1">Departure Hour: {trip.departureHour}</div>
@@ -54,7 +61,7 @@ const DisplayTrips = ({ userId, trips, search }: DisplayTripsProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default DisplayTrips;

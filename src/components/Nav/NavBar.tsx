@@ -28,7 +28,7 @@ const NavBar = async() =>{
                             <Link href={"/driver"} className="text-white">Ratings</Link>
                         </>
                     }
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center cursor-pointer">
                         <UserMenu username={session.user?.username}/><CaretDown />
                     </div>
                 </div>

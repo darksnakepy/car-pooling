@@ -2,75 +2,86 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 enum UserType {
-    USER 
-    DRIVER
+  USER
+  DRIVER
 }
 
 model User {
-    id            String            @id
-    username      String            @unique 
-    email         String            @unique
-    password      String
-    name          String
-    lastname      String 
-    phoneNumber   String            @unique
-    idCard        String            @unique
-    userType      UserType
-    driverId      String?           @unique
-    sessions      Session[]
-    Driver        Driver?           @relation(fields: [driverId], references: [id], onDelete: Cascade)
-    Feedback      Feedback[]  
+  id          String     @id
+  username    String     @unique
+  email       String     @unique
+  password    String
+  name        String
+  lastname    String
+  phoneNumber String     @unique
+  idCard      String     @unique
+  userType    UserType
+  driverId    String?    @unique
+  sessions    Session[]
+  Driver      Driver?    @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  Feedback    Feedback[]
+  Booking     Booking[]
 }
 
 model Driver {
-    id              String          @id @default(cuid())
-    User            User?
-    license         DrivingLicense  @relation(fields: [licenseNumber], references: [licenseId], onDelete: Cascade)
-    licenseNumber   String          @unique
-    Car             Car[]
-    trips           Trip[]
+  id            String         @id @default(cuid())
+  User          User?
+  license       DrivingLicense @relation(fields: [licenseNumber], references: [licenseId], onDelete: Cascade)
+  licenseNumber String         @unique
+  Car           Car[]
+  trips         Trip[]
 }
 
-model DrivingLicense{
-    licenseId     String      @id
-    expiration    DateTime
-    Driver        Driver?
+model DrivingLicense {
+  licenseId  String   @id
+  expiration DateTime
+  Driver     Driver?
 }
 
 model Car {
-    licensePlate  String           @id
-    model         String 
-    Driver        Driver           @relation(fields: [driverId], references: [id])
-    driverId      String           @unique
+  licensePlate String @id
+  model        String
+  Driver       Driver @relation(fields: [driverId], references: [id])
+  driverId     String @unique
 }
 
 model Trip {
-    id                String        @id @default(cuid())
-    departureCity     String
-    destinationCity   String
-    departureDate      String
-    departureHour     String
-    price             Decimal
-    estimatedTime     String
-    driverId          String
-    Driver            Driver?       @relation(fields: [driverId], references: [id])
-    
+  id              String  @id @default(cuid())
+  departureCity   String
+  destinationCity String
+  departureDate   String
+  departureHour   String
+  price           Decimal
+  estimatedTime   String
+  driverId        String
+  Driver          Driver? @relation(fields: [driverId], references: [id])
+  Booking         Booking[]
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  status    String
+  tripId    String
+  userId    String
+  trip      Trip     @relation(fields: [tripId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Feedback {
-    id      String                  @id
-    rating  String   
-    User    User?                   @relation(fields: [userId], references: [id])
-    userId  String?
+  id     String  @id
+  rating String
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 model Session {

@@ -1,12 +1,16 @@
+import { validateRequest } from "~/server/auth";
 import NavBar from "../components/Nav/NavBar";
 import RideBar from "../components/SearchForm/RideBar";
 
-export default function HomePage() {
+export default async function HomePage() {
+
+  const session = await validateRequest()
 
   return (
     <div className="bg-[#1e2022]">
       <NavBar/>
-      <RideBar />
+      {session.user?.userType === "USER" ? (
+      <RideBar />) : (<></>)}
     </div>
   );
 }
