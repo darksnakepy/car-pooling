@@ -7,22 +7,24 @@ import { cookies } from "next/headers";
 import { error } from "console";
 
 const LogIn = () => {
-    return(
-        <div className="w-full h-screen flex items-center justify-center flex-col bg-[#181a1b]">
-        <h1 className="text-[40px] mb-4 text-white">Login</h1>
-        <form className="w-1/4 flex flex-col p-7 border-2 rounded-lg mb-4" action={login}>
-            <label className="mb-1 text-white" htmlFor="username">Username:</label>
-            <input name="username" id="username" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            <label className="mt-1 text-white" htmlFor="password">Password:</label>
-            <input type="password" name="password" id="password" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            <button className="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">Log in</button>
-
-            <div className="text-white mt-3 text-[15px]">
-                    <Link className="hover:underline" href={"register/driver/"}>Register</Link>
-            </div>
-        </form>
-    </div>
-    )
+    return (
+        <div className="w-full h-screen flex items-center justify-center flex-col bg-gray-200">
+            <h1 className="text-3xl mb-4 text-gray-700">Login</h1>
+            <form className="w-1/4 flex flex-col p-7 border rounded-lg mb-4 bg-white border-gray-300" action={login}>
+                <label className="mb-1" htmlFor="username">Username:</label>
+                <input name="username" id="username" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 bg-gray-200" />
+                <label className="mt-1" htmlFor="password">Password:</label>
+                <input type="password" name="password" id="password" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 bg-gray-200" />
+                <button className="mt-3 bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center text-white">
+                    Log in
+                </button>
+                <div className="text-gray-700 mt-3 text-sm">
+                    <Link className="hover:underline text-blue-500" href={"/register"}>Register</Link>
+                </div>
+            </form>
+        </div>
+    );
+    
 }
 
 async function login(formData: FormData){

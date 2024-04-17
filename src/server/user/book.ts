@@ -52,11 +52,10 @@ const bookTrip = async(userId: string, tripId: string) =>{
               }
         })
 
-        return redirect("/user")
-
     }catch(error) {
         console.error("Error booking trip:", error);
     }
+    return redirect("/user")
 } 
 
 export default bookTrip

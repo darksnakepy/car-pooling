@@ -1,43 +1,57 @@
-import Link from "next/link"
-import { validateRequest } from "~/server/auth"
+import Link from "next/link";
+import { validateRequest } from "~/server/auth";
 import Image from 'next/image'
-import UserMenu from "./UserMenu"
+import UserMenu from "./UserMenu";
 import { CaretDown } from "react-bootstrap-icons";
 
+const NavBar = async () => {
+  const session = await validateRequest();
 
-const NavBar = async() =>{   
+  try {
+    return (
+      <div className="fixed w-full bg-gray-250 shadow">
+        <div className="px-4 md:px-16 py-7 flex flex-row items-center justify-between overflow-hidden">
+          {/* Logo */}
+          {/* <Image src={} width={} height={}></Image>  */}
 
-    const session = await validateRequest()
-    try {
-        return(
-            <div className="fixed w-full bg-[#181a1b] shadow-sm ">
-                <div className="px-4 md:px-16 py-8 flex flex-row items-center justify-between overflow-hidden">
-                    {/*<Image src={} width={} height={}></Image> logo*/}
+          <div className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-10 text-white text-gray-900">
+            {session.session && session?.user?.userType === "DRIVER" ? (
+              <>
+                <Link href={"/driver/createtrip"} className="hover:text-blue-600">
+                  Create a new trip
+                </Link>
+                <Link href={"/driver/createcar"} className="hover:text-blue-600">
+                  Add a car
+                </Link>
+                <Link href={"/driver"} className="hover:text-blue-600">
+                  Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href={"/profile"} className="hover:text-blue-600">
+                  Your bookings
+                </Link>
+                <Link href={"/user"} className="hover:text-blue-600">
+                  Homepage
+                </Link>
+                <Link href={"/driver"} className="hover:text-blue-600">
+                  Ratings
+                </Link>
+              </>
+            )}
+          </div>
 
-                    <div className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-10 text-white">
-                        {session.session && session?.user?.userType === "DRIVER" ? 
-                            <>  
-                                <Link href={"/driver/createtrip"} className="">Create a new trip</Link>
-                                <Link href={"/driver/createcar"} className="">Add a car</Link>
-                                <Link href={"/driver"} className="">Dashboard</Link>
-                            </>
-                            :
-                            <>
-                                <Link href={"/profile"} className="text-white">Your bookings</Link>
-                                <Link href={"/user"} className="text-white">Homepage</Link>
-                                <Link href={"/driver"} className="text-white">Ratings</Link>
-                            </>
-                        }
-                        <div className="flex items-center justify-center cursor-pointer">
-                            <UserMenu username={session.user?.username}/><CaretDown />
-                        </div>
-                    </div>
-                </div>   
-            </div>
-        )
-    }catch(error){
-        console.log(error)
-    }
-}
+          <div className="flex items-center justify-end">
+            <UserMenu username={session.user?.username} />
+            <CaretDown className=" text-gray-900 cursor-pointer" />
+          </div>
+        </div>
+      </div>
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export default NavBar
+export default NavBar;

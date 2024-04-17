@@ -57,6 +57,7 @@ model Car {
 
 model Trip {
   id              String  @id @default(cuid())
+  seats           String
   departureCity   String
   destinationCity String
   departureDate   String
