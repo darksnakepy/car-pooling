@@ -52,6 +52,7 @@ model Car {
   model        String
   Driver       Driver @relation(fields: [driverId], references: [id])
   driverId     String 
+  Trip         Trip[]
 }
 
 model Trip {
@@ -65,6 +66,9 @@ model Trip {
   driverId        String
   Driver          Driver? @relation(fields: [driverId], references: [id])
   Booking         Booking[]
+  carlicensePlate String
+  car             Car    @relation(fields: [carlicensePlate], references: [licensePlate], onDelete: Cascade)
+  isBooked        Boolean
 }
 
 model Booking {

@@ -22,6 +22,7 @@ interface Trips {
   departureDate: string
   price: number
   driverId: string
+  isBooked: boolean
 }
 
 
@@ -34,8 +35,9 @@ const DisplayTrips = async({ userId, trips, search, status }: DisplayTripsProps)
           <h2 className="text-xl flex items-center justify-center font-bold mb-4">
             Found Trips
           </h2>
-          {trips.length > 0 && status !== "PENDING" || status !== "RESERVED" ?  (
+          {trips.length > 0 && status !== "PENDING" || status !== "RESERVED" ? (
             trips.map((trip) => (
+              !trip.isBooked ? (
               <div
                 key={trip.id}
                 className="flex flex-col p-7 border-2 rounded-lg mb-4 dark:bg-[#202324] mx-5"
@@ -51,7 +53,9 @@ const DisplayTrips = async({ userId, trips, search, status }: DisplayTripsProps)
                 <div className="text-sm mt-1">Departure Hour: {trip.departureHour}</div>
                 <div className="text-sm">Estimated Time: {trip.estimatedTime}</div>
                 <div className="text-sm mt-2">Cost: {trip.price}$</div>
-              </div>
+              </div> ) : <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">
+              No trips found
+            </div>
             ))
           ) : (
             <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">

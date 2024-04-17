@@ -86,16 +86,9 @@ async function register(formData: FormData){
 			error: "Identity card is not valid"
 		} 
 	}
-	if(user.expiration < dateTime){
-		console.log(dateTime)
-		console.log("License is not valid anymore")
-		return {
-			error: "License is not valid anymore"
-		} 
-	}
 
 	const hashedPassword = await new Argon2id().hash(user.password);
-	const id = await generateId(15)
+	const id = generateId(15)
 
 	try{
 		const newUser = await db.user.create({

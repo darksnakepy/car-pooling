@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import { db } from "~/server/db"
 
 interface DriverTripProps{
-    driverId: string
+    driverId?: string
     cars?: Cars[]
 }
 
@@ -29,14 +29,14 @@ const CreateTrip = async({driverId, cars}:DriverTripProps) =>{
             <label className="mb-1 text-white" htmlFor="estTime">Estimated time:</label>
             <input name="estTime" id="estTime" required className="text-sm rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             <label className="mb-1 text-white" htmlFor="price">Choose the car for your trip:</label>
-            <select className="rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="default"></option>
-                    {cars?.map((car) => (
-                        <option key={car.licensePlate} value={car.licensePlate}>
-                            {car.model} - {car.licensePlate}
-                        </option>
-                    ))}
-                </select>
+            <select required defaultValue={"default"} id="selectedCar" name="selectedCar" className="rounded-lg focus:ring-blue-500 block w-full p-2 dark:bg-[#202324] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="default"></option>
+                {cars?.map((car) => (
+                    <option key={car.licensePlate} value={car.licensePlate}>
+                        {car.model} - {car.licensePlate}
+                    </option>
+                ))}
+            </select>
             <button className="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">Create a trip</button>
         </form>
     </div>
@@ -52,19 +52,10 @@ async function addTrip(id: string, formData: FormData){
         depHour: formData.get("depHour") as string,
         price: formData.get("price") as string,
         estTime: formData.get("estTime") as string,
+        carLicensePlate: formData.get("selectedCar") as string
     }
 
-    const user = await db.driver.findUnique({
-        where: {
-            id: id 
-        }
-    })
-
-    if(!user){
-        return null
-    }
-
-    const addTrip = await db.trip.create({
+    await db.trip.create({
         data: {
             departureCity: trip.depCity.toLocaleLowerCase(),
             destinationCity: trip.destCity.toLocaleLowerCase(),
@@ -72,7 +63,9 @@ async function addTrip(id: string, formData: FormData){
             departureHour: trip.depHour,
             price: trip.price,
             estimatedTime: trip.estTime,
-            driverId: id
+            driverId: id,
+            carlicensePlate: trip.carLicensePlate,
+            isBooked: false
         }
     })
     return redirect("/driver")

@@ -35,24 +35,28 @@ const UserMenu = ({ username }: UserMenuProps) => {
         }
     };
 
-    return (
-        <div>
-            <button onClick={handleClick} className="text-white hover:text-gray-300 focus:outline-none">My profile</button>
-            <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-            >
-                {!username && <MenuItem onClick={handleSignUp}>Create an account</MenuItem>}
-                <MenuItem onClick={handleClickProfile} >{username ? username : "Login"}</MenuItem>
-                {username && <MenuItem onClick={async () => await signOut()}>Log out</MenuItem>}
-            </Menu>
-        </div>
-    );
+    try {
+        return (
+            <div>
+                <button onClick={handleClick} className="text-white hover:text-gray-300 focus:outline-none">My profile</button>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    {!username && <MenuItem onClick={handleSignUp}>Create an account</MenuItem>}
+                    <MenuItem onClick={handleClickProfile} >{username ? username : "Login"}</MenuItem>
+                    {username && <MenuItem onClick={async () => await signOut()}>Log out</MenuItem>}
+                </Menu>
+            </div>
+        );}
+    catch(error){
+        console.log(error)
+    }
 };
 
 export default UserMenu;

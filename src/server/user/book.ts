@@ -24,7 +24,17 @@ const bookTrip = async(userId: string, tripId: string) =>{
         if (!existingTrip){
             console.log("trip doesn't exist")
         }
+
+        const booking = await db.booking.findUnique({
+            where: {
+                id: tripId
+            }
+        })
         
+        if(booking){
+            return null
+        }
+
         await db.booking.create({
             data: {
                 tripId: tripId,
@@ -32,6 +42,17 @@ const bookTrip = async(userId: string, tripId: string) =>{
                 status: "PENDING"
             }
         })
+
+        await db.trip.update({
+            where: {
+                id: tripId
+              },
+              data: {
+                isBooked: true
+              }
+        })
+
+        return redirect("/user")
 
     }catch(error) {
         console.error("Error booking trip:", error);

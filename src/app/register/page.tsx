@@ -75,7 +75,7 @@ async function register(formData: FormData){
 	}
 
 	const hashedPassword = await new Argon2id().hash(user.password);
-	const id = await generateId(15)
+	const id = generateId(15)
 
 	try{
 		const newUser = await db.user.create({

@@ -27,7 +27,13 @@ const driver = async() =>{
                             departureHour: true,
                             estimatedTime: true,
                             departureDate: true,
-                            price: true
+                            price: true,
+                            car: {
+                                select: {
+                                    licensePlate: true,
+                                    model: true
+                                }
+                            }
                         }
                     }
                 },

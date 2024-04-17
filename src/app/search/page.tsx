@@ -30,7 +30,8 @@ const Trip = async({ searchParams }: { searchParams: { [key: string]: string | s
             departureHour: true,
             estimatedTime: true,
             departureDate: true,
-            price: true
+            price: true,
+            isBooked: true
         }
     })
 

@@ -2,15 +2,15 @@ import Image from "next/image"
 import user from "~/../public/contacts-xxl.png"
 
 interface DriverPageProps{ 
-    id: string
+    id?: string
     username?: string
     name?: string
     lastName?: string
-    Car?: CarProps[]
+    Car?: Car[]
     Trips?: Trips[]
 }
 
-interface CarProps{
+interface Car{
     model: string
     licensePlate: string
 }
@@ -23,6 +23,7 @@ interface Trips{
     departureHour: string
     estimatedTime: string
     price: string
+    car: Car
 }
 
 const DriverPage = async({id, username, name, Car, Trips}: DriverPageProps) =>{
@@ -35,7 +36,7 @@ const DriverPage = async({id, username, name, Car, Trips}: DriverPageProps) =>{
                         <div className="bg-[#181a1b] shadow rounded-lg p-6">
                             <div className="flex flex-col items-center">
                                 <Image src={user} width={"50"} height={"50"} alt="user"/>
-                                <h1 className="mt-3 text-xl font-bold">{username}</h1>
+                                <h1 className="mt-3 text-xl font-bold">Hello!, {username}</h1>
                                 <p className="text-gray-300">{name}</p>
                                 <p className="mt-2 text-gray-300">driver id: {id}</p>
                                 <div className="mt-3 flex flex-wrap gap-4 justify-center">
@@ -48,7 +49,7 @@ const DriverPage = async({id, username, name, Car, Trips}: DriverPageProps) =>{
                                 <span className="text-[#bdb7af] uppercase font-bold tracking-wider mb-2">Your cars:</span>
                                 <ul>
                                     {Car?.map((car) =>(
-                                        <li>Model: {car.model} - Lic Plate: {car.licensePlate}</li>
+                                        <li>Model: {car.model} - Lic. Plate: {car.licensePlate}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -58,19 +59,24 @@ const DriverPage = async({id, username, name, Car, Trips}: DriverPageProps) =>{
                     <div className="col-span-4 sm:col-span-9">
                         <div className="bg-[#181a1b] shadow rounded-lg p-6">
                             <h2 className="text-xl flex items-center justify-center font-bold mb-4">Created trips</h2>
-                                {Trips && Trips.length > 0 ? (
-                                    Trips.map((trip) => (
-                                        <div key={trip.id} className="w-full flex flex-col p-7 border-2 rounded-lg mb-4 dark:bg-[#202324] shadow-md">
-                                            <p className="font-bold font-medium text-white">
-                                                {trip.departureCity} - {trip.destinationCity}
-                                            </p>
-                                            <div className="flex flex-row justify-between mt-2 text-white">
-                                                <div className="text-sm">Departure Time: {trip.departureHour}</div>
-                                                <div className="text-sm font-bold">Estimated Time: {trip.estimatedTime}</div>
-                                            </div>
-                                            <div className="text-sm">Departure Date: {trip.departureDate}</div>
-                                            <div className="text-sm mt-2">Cost: {trip.price.toString()}$</div>
+                            {Trips && Trips.length > 0 ? (
+                                Trips.map((trip) => (
+                                    <div key={trip.id} className="w-full flex flex-col p-7 border-2 rounded-lg mb-4 dark:bg-[#202324] shadow-md">
+                                        <p className="font-bold font-medium text-white">
+                                            {trip.departureCity} - {trip.destinationCity}
+                                        </p>
+                                        <div className="flex flex-row justify-between mt-2 text-white">
+                                            <div className="text-sm">Departure Time: {trip.departureHour}</div>
+                                            <div className="text-sm font-bold">Estimated Time: {trip.estimatedTime}</div>
                                         </div>
+                                        <div className="text-sm">Departure Date: {trip.departureDate}</div>
+                                        <div className="text-sm mt-2">Cost: {trip.price.toString()}$</div>
+                                        {trip.car ? (
+                                            <div className="text-sm mt-2">Car: {trip.car.model}</div>
+                                        ) : (
+                                            <div className="text-sm mt-2">No associated car</div>
+                                        )}
+                                    </div>
                                 ))
                             ) : (
                                 <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">No trips created</div>
