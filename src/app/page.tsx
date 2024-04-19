@@ -12,7 +12,7 @@ export default async function HomePage() {
       {session.user?.userType === "USER" ? (
           <RideBar /> 
         ) : ( 
-          <div className="w-full h-screen bg-gray-200"></div>
+          <div className="w-full h-screen bg-gray-200 text-gray-100"></div>
       )}
     </div>
   );

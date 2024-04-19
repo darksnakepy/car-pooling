@@ -1,6 +1,3 @@
-import Image from "next/image";
-import user from "~/../public/contacts-xxl.png";
-
 interface DriverPageProps {
     id?: string;
     username?: string;
@@ -24,12 +21,18 @@ interface Trips {
     estimatedTime: string;
     price: string;
     car: Car;
+    bookings: BookingsToAccept[]
+}
+
+interface BookingsToAccept{
+    bookingUser: string
+    bookingDate: string
 }
 
 const DriverPage = async ({ id, username, name, Car, Trips }: DriverPageProps) => {
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-200 text-black">
+        <div className="flex justify-center h-screen bg-gray-200 text-black">
             <div className="container mx-auto py-8">
                 <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
                     <div className="col-span-4 sm:col-span-3">
@@ -80,6 +83,20 @@ const DriverPage = async ({ id, username, name, Car, Trips }: DriverPageProps) =
                             ) : (
                                 <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">No trips created</div>
                             )}
+                        </div>
+                        <div>
+                            <div className="mt-5 bg-white shadow rounded-lg p-6">
+                                <h2 className="text-xl flex items-center justify-center font-bold mb-4">Bookings to accept</h2>
+                                {/*Trips && Trips.length > 0 ? (
+                                    Trips.map((trip) => (
+                                        <div key={trip.id} className="w-full flex flex-col p-7 border-2 rounded-lg mb-4 shadow-md">
+                                            {trip.bookings.bookingUser}
+                                        </div>
+                                ))
+                            ) : (
+                                <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">No trips created</div>
+                            )*/}
+                            </div>
                         </div>
                     </div>
                 </div>

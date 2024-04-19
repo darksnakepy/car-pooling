@@ -14,28 +14,28 @@ const NavBar = async () => {
           {/* Logo */}
           {/* <Image src={} width={} height={}></Image>  */}
 
-          <div className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-10 text-white text-gray-900">
+          <div className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-10 text-white">
             {session.session && session?.user?.userType === "DRIVER" ? (
               <>
-                <Link href={"/driver/createtrip"} className="hover:text-blue-600">
+                <Link href={"/driver/createtrip"} className="hover:text-blue-600 text-gray-900">
                   Create a new trip
                 </Link>
-                <Link href={"/driver/createcar"} className="hover:text-blue-600">
+                <Link href={"/driver/createcar"} className="hover:text-blue-600 text-gray-900">
                   Add a car
                 </Link>
-                <Link href={"/driver"} className="hover:text-blue-600">
+                <Link href={"/driver"} className="hover:text-blue-600 text-gray-900">
                   Dashboard
                 </Link>
               </>
             ) : (
               <>
-                <Link href={"/profile"} className="hover:text-blue-600">
+                <Link href={"/profile"} className="hover:text-blue-600 text-gray-900">
                   Your bookings
                 </Link>
-                <Link href={"/user"} className="hover:text-blue-600">
+                <Link href={"/user"} className="hover:text-blue-600 text-gray-900">
                   Homepage
                 </Link>
-                <Link href={"/driver"} className="hover:text-blue-600">
+                <Link href={"/driver"} className="hover:text-blue-600 text-gray-900">
                   Ratings
                 </Link>
               </>

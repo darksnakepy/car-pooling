@@ -31,20 +31,20 @@ const DisplayTrips = async ({ userId, trips, search, status }: DisplayTripsProps
       <div className="container mx-auto py-8">
         <div className="bg-white shadow rounded py-8">
           <h2 className="text-xl flex items-center justify-center font-bold mb-4 text-blue-600">
-            Found Trips
+            Trips that we found 
           </h2>
           {trips.length > 0 && status !== "PENDING" || status !== "RESERVED" ? (
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+            <div className="col-span-4 sm:col-span-9">
               {trips.map((trip) => (
                 !trip.isBooked ? (
                   <div
                     key={trip.id}
-                    className="flex flex-col p-7 border rounded-lg dark:bg-gray-600 items-center"
+                    className="flex flex-col p-7 border-2 rounded-lg mb-4 bg-white mx-5 text-gray-700"
                   >
-                    <p className="font-bold text-white"> {/* Updated text color */}
+                    <p className="font-bold"> {/* Updated text color */}
                       {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()}
                     </p>
-                    <div className="flex flex-row justify-between mt-2 text-white"> {/* Updated text color */}
+                    <div className="flex flex-row justify-between mt-2"> {/* Updated text color */}
                       <div className="text-sm">Departure Date: {trip.departureDate}</div>
                       <button
                         onClick={async () => await bookTrip(userId, trip.id)}
