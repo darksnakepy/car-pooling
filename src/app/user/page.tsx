@@ -1,4 +1,3 @@
-import { string } from "zod"
 import UserPage from "~/components/User/UserPage"
 import { validateRequest } from "~/server/auth"
 import { db } from "~/server/db"

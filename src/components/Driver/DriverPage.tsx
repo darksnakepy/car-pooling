@@ -1,35 +1,45 @@
+"use client"
+
+import acceptBooking from "~/server/driver/acceptBooking"
+
 interface DriverPageProps {
-    id?: string;
-    username?: string;
-    name?: string;
-    lastName?: string;
-    Car?: Car[];
-    Trips?: Trips[];
+    id?: string
+    username?: string
+    name?: string
+    lastName?: string
+    Car?: Car[]
+    Trips?: Trips[]
 }
 
 interface Car {
-    model: string;
-    licensePlate: string;
+    model: string
+    licensePlate: string
 }
 
 interface Trips {
-    id: string;
-    departureCity: string;
-    destinationCity: string;
-    departureDate: string;
-    departureHour: string;
-    estimatedTime: string;
-    price: string;
-    car: Car;
-    bookings: BookingsToAccept[]
+    id: string
+    departureCity: string
+    destinationCity: string
+    departureDate: string
+    departureHour: string
+    estimatedTime: string
+    price: string
+    car: Car
+    Booking: BookingProps
 }
 
-interface BookingsToAccept{
-    bookingUser: string
-    bookingDate: string
+interface BookingProps{
+    id: string
+    createdAt: string
+    user: BookingUser
 }
 
-const DriverPage = async ({ id, username, name, Car, Trips }: DriverPageProps) => {
+interface BookingUser{
+    name: string
+    lastname: string
+}
+
+const DriverPage = async ({ id, username, name, Car, Trips}: DriverPageProps) => {
 
     return (
         <div className="flex justify-center h-screen bg-gray-200 text-black">
@@ -68,7 +78,7 @@ const DriverPage = async ({ id, username, name, Car, Trips }: DriverPageProps) =
                                             {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()}
                                         </p>
                                         <div className="flex flex-row justify-between mt-2 text-gray-800">
-                                            <div className="text-sm">Departure Time: {trip.departureHour}</div>
+                                            <div className="text-sm ">Departure Time: {trip.departureHour}</div>
                                             <div className="text-sm font-bold">Estimated Time: {trip.estimatedTime}</div>
                                         </div>
                                         <div className="text-sm">Departure Date: {trip.departureDate}</div>
@@ -84,19 +94,27 @@ const DriverPage = async ({ id, username, name, Car, Trips }: DriverPageProps) =
                                 <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">No trips created</div>
                             )}
                         </div>
-                        <div>
-                            <div className="mt-5 bg-white shadow rounded-lg p-6">
-                                <h2 className="text-xl flex items-center justify-center font-bold mb-4">Bookings to accept</h2>
-                                {/*Trips && Trips.length > 0 ? (
-                                    Trips.map((trip) => (
-                                        <div key={trip.id} className="w-full flex flex-col p-7 border-2 rounded-lg mb-4 shadow-md">
-                                            {trip.bookings.bookingUser}
-                                        </div>
+                        <div className="mt-5 bg-white shadow rounded-lg p-6">
+                            <h2 className="text-xl flex items-center justify-center font-bold mb-4">Bookings to accept</h2>
+                            {Trips && Trips.length > 0 ? (
+                                Trips.map((trip) => (
+                                    <div key={trip.id} className="w-full flex flex-col p-7 border-2 rounded-lg mb-4 shadow-md">
+                                        {trip.Booking && trip.Booking.length > 0 ? (
+                                            trip.Booking.map((b) => (
+                                                <div key={b.id}>
+                                                    <p>Booking created on trip: {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()} </p>
+                                                    <p>User that has booked: {b.user.name} {b.user.lastname}</p>
+                                                    <button onClick={async () => await acceptBooking(b.id)} className="mt-2 px-3 py-1.5 bg-blue-700 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-900">Accept booking</button>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div>No bookings yet</div>
+                                        )}
+                                    </div>
                                 ))
                             ) : (
                                 <div className="flex items-center justify-center mt-5 text-[#404345] font-bold">No trips created</div>
-                            )*/}
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
