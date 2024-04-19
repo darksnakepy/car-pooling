@@ -34,6 +34,16 @@ const user = async() =>{
                                     licensePlate: true,
                                     model: true
                                 }
+                            },
+                            Driver:{
+                                select:{
+                                    User:{
+                                        select:{
+                                            name: true,
+                                            lastname: true
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

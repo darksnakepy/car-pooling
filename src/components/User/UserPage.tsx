@@ -24,11 +24,21 @@ interface Trips {
   price: string;
   status: string;
   car: Car;
+  Driver: DriverProps
 }
 
 interface Car {
   model: string;
   licensePlate: string;
+}
+
+interface DriverProps{
+  User: driverName
+}
+
+interface driverName{
+  name:string
+  lastname: string
 }
 
 const UserPage = ({ userId, name, lastname, email, Bookings }: UserPageProps) => {
@@ -58,7 +68,7 @@ const UserPage = ({ userId, name, lastname, email, Bookings }: UserPageProps) =>
                       </div>
                       <div className="flex items-center justify-between">
                         <p className="text-gray-700">Departure Time: {b.trip.departureHour}</p>
-                        <p className="text-gray-700">Car Model: {b.trip.car.model.toUpperCase()}</p>
+                        <p className="text-gray-700">Your driver: {b.trip.Driver.User.name}, {b.trip.Driver.User.lastname}</p>
                       </div>
                     </div>
                   ))}
