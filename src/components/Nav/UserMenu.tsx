@@ -38,7 +38,7 @@ const UserMenu = ({ username }: UserMenuProps) => {
     try {
         return (
             <div>
-                <button onClick={handleClick} className="font-semibold text-white focus:outline-none text-gray-900">My profile</button>
+                <button onClick={handleClick} className="font-semibold hover:text-blue-600 focus:outline-none text-gray-900">My profile</button>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

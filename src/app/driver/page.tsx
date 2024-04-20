@@ -37,6 +37,7 @@ const driver = async() =>{
                             Booking: {
                                 select:{
                                     id:true,
+                                    status: true,
                                     user:{
                                         select:{
                                             name: true,

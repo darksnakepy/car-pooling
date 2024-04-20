@@ -39,6 +39,7 @@ const user = async() =>{
                                 select:{
                                     User:{
                                         select:{
+                                            id: true,
                                             name: true,
                                             lastname: true
                                         }

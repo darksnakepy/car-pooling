@@ -42,9 +42,9 @@ const NavBar = async () => {
             )}
           </div>
 
-          <div className="flex items-center justify-end">
-            <UserMenu username={session.user?.username} />
-            <CaretDown className=" text-gray-900 cursor-pointer" />
+          <div className="flex items-center justify-end hover:text-blue-600">
+            <UserMenu username={"Your profile"} />
+            <CaretDown className="text-gray-900 cursor-pointer"/>
           </div>
         </div>
       </div>

@@ -1,4 +1,10 @@
+"use client"
+
 import Image from "next/image";
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import { useState } from "react";
+import rateDriver from "~/server/user/rateDriver";
 
 interface UserPageProps {
   userId: string;
@@ -37,11 +43,16 @@ interface DriverProps{
 }
 
 interface driverName{
+  id: string
   name:string
   lastname: string
 }
 
 const UserPage = ({ userId, name, lastname, email, Bookings }: UserPageProps) => {
+
+  const [value, setValue] = useState<number | null>(0);
+  console.log(value)
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-200">
       <div className="container mx-auto py-8">
@@ -64,11 +75,22 @@ const UserPage = ({ userId, name, lastname, email, Bookings }: UserPageProps) =>
                           <p className="text-lg font-semibold text-blue-600">{b.trip.departureCity.toUpperCase()} - {b.trip.destinationCity.toUpperCase()}</p>
                           <p className="mt-2 text-gray-700">Departure Date: {b.trip.departureDate}</p>
                         </div>
-                        <p className="text-gray-700">Status: {b.status}</p>
+                        <p className="text-gray-700">Status of your booking: {b.status}</p>
                       </div>
                       <div className="flex items-center justify-between">
                         <p className="text-gray-700">Departure Time: {b.trip.departureHour}</p>
-                        <p className="text-gray-700">Your driver: {b.trip.Driver.User.name}, {b.trip.Driver.User.lastname}</p>
+                        <p className="text-gray-700">Your driver: {b.trip.Driver.User.name} {b.trip.Driver.User.lastname}</p>
+                        {/*b.status === "ACCEPTED" ? (
+                          <div>
+                           {<Typography className="text-gray-700" component="legend">Give the driver a rating</Typography>
+                           <Rating
+                              name="simple-controlled"
+                              value={value}
+                              onChange={(event, newValue) => {
+                                setValue(newValue);
+                              }}
+                          />{value ? <button className="mt-2 px-3 py-1.5 bg-blue-700 text-white rounded-md focus:outline-none focus:bg-blue-900" onClick={async () => {rateDriver(value, b.trip.Driver.User.id)}}>Rate</button> : <div></div> }
+                            </div>) : (<div></div>)} */}
                       </div>
                     </div>
                   ))}

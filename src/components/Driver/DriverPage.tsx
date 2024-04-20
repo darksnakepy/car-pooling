@@ -30,6 +30,7 @@ interface Trips {
 
 interface BookingProps{
     id: string
+    status: string
     createdAt: string
     user: BookingUser
 }
@@ -102,9 +103,10 @@ const DriverPage = async ({ id, username, name, Car, Trips}: DriverPageProps) =>
                                         {trip.Booking && trip.Booking.length > 0 ? (
                                             trip.Booking.map((b) => (
                                                 <div key={b.id}>
-                                                    <p>Booking created on trip: {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()} </p>
+                                                    <p>Booking created on your trip: {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()} </p>
                                                     <p>User that has booked: {b.user.name} {b.user.lastname}</p>
-                                                    <button onClick={async () => await acceptBooking(b.id)} className="mt-2 px-3 py-1.5 bg-blue-700 text-white rounded-md focus:outline-none focus:bg-blue-900">Accept booking</button>
+                                                    {b.status === "ACCEPTED" ? (
+                                                        <div>Booking succesfully accepted</div>) : (<button onClick={async () => await acceptBooking(b.id)} className="mt-2 px-3 py-1.5 bg-blue-700 text-white rounded-md focus:outline-none focus:bg-blue-900">Accept booking</button>)}
                                                 </div>
                                             ))
                                         ) : (
