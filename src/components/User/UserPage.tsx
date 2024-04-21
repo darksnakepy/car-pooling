@@ -80,17 +80,17 @@ const UserPage = ({ userId, name, lastname, email, Bookings }: UserPageProps) =>
                       <div className="flex items-center justify-between">
                         <p className="text-gray-700">Departure Time: {b.trip.departureHour}</p>
                         <p className="text-gray-700">Your driver: {b.trip.Driver.User.name} {b.trip.Driver.User.lastname}</p>
-                        {/*b.status === "ACCEPTED" ? (
-                          <div>
-                           {<Typography className="text-gray-700" component="legend">Give the driver a rating</Typography>
+                        {b.status === "ACCEPTED" ? (
+                          <div className="flex flex-row">
+                           {<Typography className="text-gray-700" component="legend">Give the driver a rating</Typography>}
                            <Rating
                               name="simple-controlled"
                               value={value}
                               onChange={(event, newValue) => {
                                 setValue(newValue);
                               }}
-                          />{value ? <button className="mt-2 px-3 py-1.5 bg-blue-700 text-white rounded-md focus:outline-none focus:bg-blue-900" onClick={async () => {rateDriver(value, b.trip.Driver.User.id)}}>Rate</button> : <div></div> }
-                            </div>) : (<div></div>)} */}
+                          />{value ? <button className="ml-2 px-2 py-0.5 bg-blue-700 text-white rounded-md focus:outline-none focus:bg-blue-900" onClick={async () => {rateDriver(value, b.trip.Driver.User.id)}}>Rate</button> : <div></div> }
+                            </div>) : (<div></div>)} 
                       </div>
                     </div>
                   ))}
