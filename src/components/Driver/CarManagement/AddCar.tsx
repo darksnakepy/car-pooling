@@ -2,10 +2,14 @@ import { redirect } from "next/navigation"
 import { db } from "~/server/db"
 
 interface AddCarProps{
-    driverId: string
+    driverId?: string
 }
 
 const AddCar = ({driverId}: AddCarProps) =>{
+
+    if(!driverId){
+        return null
+    }
 
     return (
         <div className="w-full h-screen flex items-center justify-center flex-col bg-gray-200">
@@ -20,7 +24,7 @@ const AddCar = ({driverId}: AddCarProps) =>{
                 </button>
             </form>
         </div>
-    );
+    )
 }
 
 async function addCar(driverId: string, formData: FormData){
@@ -49,7 +53,7 @@ async function addCar(driverId: string, formData: FormData){
 
     if(checkVehicle){
        console.log("car exists")
-    }
+    }else
     
     await db.car.create({
         data: {

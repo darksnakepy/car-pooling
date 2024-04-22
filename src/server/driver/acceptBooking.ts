@@ -4,7 +4,6 @@ import { validateRequest } from "../auth"
 import { db } from "../db"
 
 const acceptBooking = async(bookingId: string) =>{
-
     const session = await validateRequest()
     if(session.user?.userType !=="DRIVER"){
         return null
@@ -19,7 +18,8 @@ const acceptBooking = async(bookingId: string) =>{
                 status: "ACCEPTED"
             }
         })
-    }catch(error){
+        }
+    catch(error){
         console.log(error)
     }
 }

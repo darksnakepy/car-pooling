@@ -1,11 +1,11 @@
-import Link from "next/link";
-import { validateRequest } from "~/server/auth";
+import Link from "next/link"
+import { validateRequest } from "~/server/auth"
 import Image from 'next/image'
-import UserMenu from "./UserMenu";
-import { CaretDown } from "react-bootstrap-icons";
+import UserMenu from "./UserMenu"
+import { CaretDown } from "react-bootstrap-icons"
 
 const NavBar = async () => {
-  const session = await validateRequest();
+  const session = await validateRequest()
 
   try {
     return (
@@ -43,15 +43,15 @@ const NavBar = async () => {
           </div>
 
           <div className="flex items-center justify-end hover:text-blue-600">
-            <UserMenu username={"Your profile"} />
+            <UserMenu username={session.user?.username} />
             <CaretDown className="text-gray-900 cursor-pointer"/>
           </div>
         </div>
       </div>
-    );
+    )
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
-export default NavBar;
+export default NavBar

@@ -1,17 +1,22 @@
-import { redirect } from "next/navigation";
-import { db } from "~/server/db";
+import { redirect } from "next/navigation"
+import { db } from "~/server/db"
 
 interface DriverTripProps {
-  driverId: string;
-  cars?: Cars[];
+  driverId?: string
+  cars?: Cars[]
 }
 
 interface Cars {
-  licensePlate: string;
-  model: string;
+  licensePlate: string
+  model: string
 }
 
 const CreateTrip = async ({ driverId, cars }: DriverTripProps) => {
+
+  if(!driverId){
+    return null
+  }
+
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col bg-gray-200">
       <h1 className="text-3xl mb-4 text-gray-700 font-bold">Create a trip</h1>
@@ -44,11 +49,11 @@ const CreateTrip = async ({ driverId, cars }: DriverTripProps) => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
 async function addTrip(id: string, formData: FormData) {
-  "use server";
+  "use server"
   const trip = {
     depCity: formData.get("depCity") as string,
     destCity: formData.get("destCity") as string,
@@ -58,7 +63,7 @@ async function addTrip(id: string, formData: FormData) {
     estTime: formData.get("estTime") as string,
     seats: formData.get("seats") as string,
     carLicensePlate: formData.get("selectedCar") as string,
-  };
+  }
 
   await db.trip.create({
     data: {
@@ -73,8 +78,8 @@ async function addTrip(id: string, formData: FormData) {
       carlicensePlate: trip.carLicensePlate,
       isBooked: false,
     },
-  });
-  return redirect("/driver");
+  })
+  return redirect("/driver")
 }
 
-export default CreateTrip;
+export default CreateTrip

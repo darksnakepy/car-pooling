@@ -1,12 +1,15 @@
 "use client"
 
 import acceptBooking from "~/server/driver/acceptBooking"
+import Rating from '@mui/material/Rating'
+import Typography from '@mui/material/Typography'
 
 interface DriverPageProps {
-    id?: string
-    username?: string
-    name?: string
-    lastName?: string
+    id: string
+    username: string
+    name: string
+    lastname: string
+    Feedback?: FeedbackProps[]
     Car?: Car[]
     Trips?: Trips[]
 }
@@ -25,7 +28,7 @@ interface Trips {
     estimatedTime: string
     price: string
     car: Car
-    Booking: BookingProps
+    Booking: BookingProps[]
 }
 
 interface BookingProps{
@@ -40,7 +43,19 @@ interface BookingUser{
     lastname: string
 }
 
-const DriverPage = async ({ id, username, name, Car, Trips}: DriverPageProps) => {
+interface FeedbackProps{
+    rating: number
+}
+
+const DriverPage = async ({ id, username, name, lastname, Car, Trips, Feedback }: DriverPageProps) => {
+
+    if(!id || !username || !name || !lastname){
+        return null
+    }
+
+    const ratings = Feedback?.map(feedback => feedback.rating)
+    const averageRating = ratings?.length ? ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length : 0
+
 
     return (
         <div className="flex justify-center h-screen bg-gray-200 text-black">
@@ -50,8 +65,13 @@ const DriverPage = async ({ id, username, name, Car, Trips}: DriverPageProps) =>
                         <div className="bg-white shadow rounded-lg p-6">
                             <div className="flex flex-col items-center">
                                 <h1 className="mt-3 text-xl font-bold">Hello!, {username}</h1>
-                                <p className="text-gray-800">{name}</p>
-                                <p className="mt-2 text-gray-800">driver id: {id}</p>
+                                <p className="mt-1 text-gray-800">{name}, {lastname}</p>
+                                <Typography className="text-gray-700 mt-2" component="legend">Your ratings</Typography>
+                                <Rating
+                                    name="read-only"
+                                    value={averageRating}
+                                    readOnly 
+                                />
                                 <div className="mt-3 flex flex-wrap gap-4 justify-center">
                                     <a href="/driver/createtrip" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center cursor-pointer">Create a new trip</a>
                                     <a href="/driver/createcar" className="text-white bg-gray-600 hover:bg-gray-700 focus:outline-none font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center cursor-pointer">Add a car</a>
@@ -122,7 +142,7 @@ const DriverPage = async ({ id, username, name, Car, Trips}: DriverPageProps) =>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default DriverPage;
+export default DriverPage

@@ -1,8 +1,8 @@
 "use server"
 
-import { redirect } from "next/navigation";
-import { validateRequest } from "../auth";
-import { db } from "../db";
+import { redirect } from "next/navigation"
+import { validateRequest } from "../auth"
+import { db } from "../db"
 
 
 const bookTrip = async(userId: string, tripId: string) =>{
@@ -53,7 +53,7 @@ const bookTrip = async(userId: string, tripId: string) =>{
         })
 
     }catch(error) {
-        console.error("Error booking trip:", error);
+        console.error("Error booking trip:", error)
     }
     return redirect("/user")
 } 

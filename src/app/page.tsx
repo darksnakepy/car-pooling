@@ -1,6 +1,6 @@
-import { validateRequest } from "~/server/auth";
-import NavBar from "../components/Nav/NavBar";
-import RideBar from "../components/SearchForm/RideBar";
+import { validateRequest } from "~/server/auth"
+import NavBar from "../components/Nav/NavBar"
+import RideBar from "../components/SearchForm/RideBar"
 
 export default async function HomePage() {
 
@@ -15,5 +15,5 @@ export default async function HomePage() {
           <div className="w-full h-screen bg-gray-200 text-gray-100"></div>
       )}
     </div>
-  );
+  )
 }

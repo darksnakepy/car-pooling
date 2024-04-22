@@ -3,26 +3,26 @@
 import bookTrip from "~/server/user/book";
 
 interface DisplayTripsProps {
-  userId: string;
-  trips: Trips[];
-  status: string;
+  userId: string
+  trips: Trips[]
+  status: string
   search: {
-    leavingfrom: string;
-    goingto: string;
-    date: string;
+    leavingfrom: string
+    goingto: string
+    date: string
   };
 }
 
 interface Trips {
-  id: string;
-  departureCity: string;
-  destinationCity: string;
-  departureHour: string;
-  estimatedTime: string;
-  departureDate: string;
-  price: number;
-  driverId: string;
-  isBooked: boolean;
+  id: string
+  departureCity: string
+  destinationCity: string
+  departureHour: string
+  estimatedTime: string
+  departureDate: string
+  price: number
+  driverId: string
+  isBooked: boolean
 }
 
 const DisplayTrips = async ({ userId, trips, search, status }: DisplayTripsProps) => {

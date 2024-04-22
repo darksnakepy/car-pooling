@@ -1,7 +1,7 @@
 "use server"
-import { redirect } from "next/navigation";
-import { lucia, validateRequest } from "~/server/auth";
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation"
+import { lucia, validateRequest } from "~/server/auth"
+import { cookies } from "next/headers"
 
 const signOut = async() =>{
     try{
@@ -9,7 +9,7 @@ const signOut = async() =>{
         if(!session){
             return null
         }
-        await lucia.invalidateSession(session.id);
+        await lucia.invalidateSession(session.id)
 
         const sessionCookie = lucia.createBlankSessionCookie();
         cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);

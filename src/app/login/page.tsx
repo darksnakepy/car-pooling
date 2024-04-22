@@ -1,10 +1,9 @@
-import Link from "next/link";
-import { db } from "~/server/db";
-import { Argon2id } from "oslo/password";
-import { redirect } from "next/navigation";
-import { lucia } from "~/server/auth";
-import { cookies } from "next/headers";
-import { error } from "console";
+import Link from "next/link"
+import { db } from "~/server/db"
+import { Argon2id } from "oslo/password"
+import { redirect } from "next/navigation"
+import { lucia } from "~/server/auth"
+import { cookies } from "next/headers"
 
 const LogIn = () => {
     return (

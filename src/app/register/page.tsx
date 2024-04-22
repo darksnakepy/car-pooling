@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { db } from "~/server/db";
-import { Argon2id } from "oslo/password";
-import { generateId } from "lucia";
-import { lucia, validateRequest } from "~/server/auth";
-import { cookies } from "next/headers";
+import Link from "next/link"
+import { db } from "~/server/db"
+import { Argon2id } from "oslo/password"
+import { generateId } from "lucia"
+import { lucia, validateRequest } from "~/server/auth"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 const Register = async() =>{

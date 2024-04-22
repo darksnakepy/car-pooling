@@ -1,41 +1,41 @@
 "use client"
 
-import Image from "next/image";
-import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
-import { useState } from "react";
-import rateDriver from "~/server/user/rateDriver";
+import Image from "next/image"
+import Rating from '@mui/material/Rating'
+import Typography from '@mui/material/Typography'
+import { useState } from "react"
+import rateDriver from "~/server/user/rateDriver"
 
 interface UserPageProps {
-  userId: string;
-  name: string;
-  lastname: string;
-  email: string;
-  Bookings: Bookings[];
+  userId: string
+  name: string
+  lastname: string
+  email: string
+  Bookings: Bookings[]
 }
 
 interface Bookings {
-  id: string;
-  status: string;
-  trip: Trips;
+  id: string
+  status: string
+  trip: Trips
 }
 
 interface Trips {
-  id: string;
-  departureCity: string;
-  destinationCity: string;
-  departureDate: string;
-  departureHour: string;
-  estimatedTime: string;
-  price: string;
-  status: string;
-  car: Car;
+  id: string
+  departureCity: string
+  destinationCity: string
+  departureDate: string
+  departureHour: string
+  estimatedTime: string
+  price: string
+  status: string
+  car: Car
   Driver: DriverProps
 }
 
 interface Car {
-  model: string;
-  licensePlate: string;
+  model: string
+  licensePlate: string
 }
 
 interface DriverProps{

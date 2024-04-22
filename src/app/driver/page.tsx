@@ -53,6 +53,11 @@ const driver = async() =>{
             username: true,
             name: true,
             lastname: true,
+            Feedback: {
+                select: {
+                    rating: true
+                }
+            }
         }        
     })
 
@@ -63,12 +68,9 @@ const driver = async() =>{
         name: driver?.name,
         lastname: driver?.lastname,
         Trips: driver?.Driver?.trips,
+        Feedback: driver?.Feedback
     }
-
-    //console.log("DriverPageProps:", JSON.stringify(DriverPageProps, null, 2));
-    //console.log("Car array:", JSON.stringify(driver?.Driver?.Car, null, 2));
-    //console.log("Booking array:", JSON.stringify(driver?.Driver?.trips?.map(trip => trip?.Booking)));
-
+    
     if(session.user?.userType==="DRIVER"){
          return <DriverPage {...DriverPageProps}/>
     }
