@@ -59,7 +59,7 @@ const DriverPage = async ({ id, username, name, lastname, Car, Trips, Feedback }
 
     return (
         <div className="flex justify-center h-screen bg-gray-200 text-black">
-            <div className="container mx-auto py-8">
+            <div className="container mx-auto py-8 overflow-auto">
                 <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
                     <div className="col-span-4 sm:col-span-3">
                         <div className="bg-white shadow rounded-lg p-6">
@@ -130,7 +130,7 @@ const DriverPage = async ({ id, username, name, lastname, Car, Trips, Feedback }
                                                 </div>
                                             ))
                                         ) : (
-                                            <div>No bookings yet</div>
+                                            <div>No booking for the trip: {trip.departureCity.toUpperCase()} - {trip.destinationCity.toUpperCase()} </div>
                                         )}
                                     </div>
                                 ))
